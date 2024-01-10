@@ -1,0 +1,31 @@
+<!-- app/views/tweets/index.html.erb -->
+
+<h1 class="teal-text text-darken-2">ホーム</h1>
+
+<div class="row">
+  <%= form_with(model: Tweet.new, url: tweets_path, method: :post, class: "col s12") do |form| %>
+    <div class="input-field">
+      <%= form.text_area :content, id: 'tweet_content', class: 'materialize-textarea', placeholder: '今何してる？', rows: 3 %>
+      <label for="tweet_content"></label>
+    </div>
+    <%= form.submit 'ツイートする', class: 'waves-effect waves-light btn' %>
+  <% end %>
+</div>
+
+<ul class="collection">
+  <% @tweets.each do |tweet| %>
+    <li class="collection-item avatar">
+      <i class="material-icons circle teal">account_circle</i>
+      <span class="title"><strong><%= tweet.user.username %></strong></span>
+      <p><%= tweet.content %></p>
+    </li>
+  <% end %>
+</ul>
+
+<% @tweets.each do |tweet| %>
+    <div class="tweet">
+      <p><%= tweet.user.username %></p>
+      <p><%= format_tweet_content(tweet.content) %></p>
+      <p><strong>Hashtags:</strong> <%= format_hashtags(tweet.hashtags) %></p>
+    </div>
+<% end %>

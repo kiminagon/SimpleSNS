@@ -1,0 +1,12 @@
+<h1>Simple SNS</h1>
+<ul>
+  <% @users.each do |user| %>
+    <li><%= user.name %></li>
+  <% end %>
+</ul>
+<form action="/users/create" method="post">
+  <%= csrf_meta_tags %>
+  <label for="username">ユーザー名:</label>
+  <input type="text" id="username" name="username" required>
+  <button type="submit">登録</button>
+</form>
